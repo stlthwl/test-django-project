@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Кандидат
+<!--{{ news_item.first_name }}-->
+{% endblock %}
+
+
+{% block content %}
+<div class="card-header">
+    <h5 class="card-title">{{ user_item.last_name }} {{ user_item.first_name }} {{ middle_item.last_name }}</h5>
+</div>
+<div class="card-body">
+    {% if user_item.photo %}
+    <img src="{{ user_item.photo.url }}" alt="..." width="150" class="float-start mr-3">
+    {% else %}
+    <img src="https://pchel.net/files/users/shinkarenko/avatars/medium/5639622_1483350701.png"
+         alt="..." width="150" class="float-start mr-3">
+    {% endif %}
+    <p class="card-title">Скилы:
+        {% for i in user_item.skill.all %}
+        {{ i.title }},
+        {% endfor %}
+    </p>
+    <p class="card-title">Языки:
+        {% for i in user_item.language.all %}
+        {{ i.title }},
+        {% endfor %}
+    </p>
+    <p class="card-title">Увлечения:
+        {% for i in user_item.hobby.all %}
+        {{ i.title }},
+        {% endfor %}
+    </p>
+    <br>
+    <br>
+    <br>
+</div>
+<div class="card-footer text-muted">
+    {{ user_item.created_at|date:"Y-m-d H-i"}}
+</div>
+{% endblock %}
+

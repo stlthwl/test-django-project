@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Главная
+{% endblock %}
+
+<!--{% block sidebar %}-->
+<!--{% include 'include/_sidebar.html' %}-->
+<!--{% endblock %}-->
+
+{% block content %}
+<h1>Кандидаты</h1>
+{% for i in users %}
+<div class="card-header">
+    {{ i.last_name }} {{ i.first_name }} {{ i.middle_name }}
+</div>
+<div class="card-body">
+    {% if i.photo %}
+    <img src="{{ i.photo.url }}" alt="..." width="150" class="me-3 float-start">
+    {% else %}
+    <img src="https://pchel.net/files/users/shinkarenko/avatars/medium/5639622_1483350701.png"
+         alt="..." width="150" class="float-start mr-3">
+    {% endif %}
+    <div class="media">
+        <div class="media_body">
+            <p class="card-title">Скилы:
+                {% for j in i.skill.all %}
+                {{ j.title }},
+                {% endfor %}
+            </p>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <!--                <p class="card-text">Языки:-->
+            <!--                    {% for j in i.language.all %}-->
+            <!--                        {{ j.title }},-->
+            <!--                    {% endfor %}-->
+            <!--                </p>-->
+            <!--                <p class="card-text">Увлечения:-->
+            <!--                    {% for j in i.hobby.all %}-->
+            <!--                        {{ j.title }},-->
+            <!--                    {% endfor %}-->
+            <!--                </p>-->
+            <a href="{{ i.get_absolute_url }}" class="btn btn-primary">Подробнее...</a>
+
+        </div>
+    </div>
+</div>
+<div class="card-footer text-muted">
+    {{ i.created_at|date:"Y-m-d H-i"}}
+</div>
+<hr>
+{% endfor %}
+{% endblock %}
